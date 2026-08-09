@@ -1,0 +1,15 @@
+{
+  "name": "VoltWorth Finance",
+  "short_name": "VoltWorth",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#06111d",
+  "theme_color": "#06111d",
+  "icons": [
+    {
+      "src": "assets/favicon.png",
+      "sizes": "1254x1254",
+      "type": "image/png"
+    }
+  ]
+}

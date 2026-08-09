@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+<title id="title">VoltWorth Finance mark</title><desc id="desc">A stylized V and rising financial arrow.</desc>
+<defs><linearGradient id="g" x1="18" y1="106" x2="111" y2="19" gradientUnits="userSpaceOnUse"><stop stop-color="#43e0c2"/><stop offset=".55" stop-color="#72b8ff"/><stop offset="1" stop-color="#f1c86b"/></linearGradient></defs>
+<rect x="5" y="5" width="118" height="118" rx="31" fill="#081726" stroke="#22445b" stroke-width="4"/>
+<path d="M28 39 51 88 67 57 79 79 103 31" fill="none" stroke="url(#g)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="m90 31 13 0 0 13" fill="none" stroke="#f1c86b" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
