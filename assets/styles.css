@@ -236,6 +236,8 @@ details p{margin:0;padding:0 18px 18px;color:var(--muted)}
   .workflow{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:780px){
+  .publishing-client-actions{flex:1 1 100% !important;width:100%}
+  .publishing-client-actions .button{flex:1 1 100%;width:100%;white-space:normal;text-align:center}
   .header-inner{padding:14px 0;align-items:flex-start;flex-direction:column}
   .site-header{position:relative}
   nav{justify-content:flex-start}
