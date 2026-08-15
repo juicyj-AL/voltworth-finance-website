@@ -261,3 +261,115 @@ details p{margin:0;padding:0 18px 18px;color:var(--muted)}
   .footer-links{grid-template-columns:1fr 1fr}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+
+/* ==========================================================================
+   VW_MOBILE_NAV_V1
+   Mobile hamburger navigation. Desktop navigation remains untouched.
+   ========================================================================== */
+.vw-mobile-menu-toggle {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .vw-mobile-menu-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-width: 96px;
+    min-height: 42px;
+    margin-left: auto;
+    padding: 9px 13px;
+    border: 1px solid rgba(35, 213, 195, 0.42);
+    border-radius: 10px;
+    background: rgba(8, 30, 40, 0.96);
+    color: #eef9fb;
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    position: relative;
+    z-index: 1002;
+  }
+
+  .vw-mobile-menu-bars {
+    width: 19px;
+    height: 15px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .vw-mobile-menu-bars span {
+    display: block;
+    width: 19px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 160ms ease, opacity 160ms ease;
+  }
+
+  .vw-mobile-menu-open .vw-mobile-menu-bars span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+
+  .vw-mobile-menu-open .vw-mobile-menu-bars span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .vw-mobile-menu-open .vw-mobile-menu-bars span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  .vw-mobile-nav-target {
+    display: none !important;
+  }
+
+  .vw-mobile-nav-target.vw-mobile-nav-open {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 4px !important;
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    right: 14px !important;
+    left: 14px !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 10px !important;
+    border: 1px solid rgba(35, 213, 195, 0.30) !important;
+    border-radius: 14px !important;
+    background: rgba(7, 24, 33, 0.985) !important;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.38) !important;
+    z-index: 1001 !important;
+  }
+
+  .vw-mobile-nav-target.vw-mobile-nav-open a {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 12px 14px !important;
+    border-radius: 9px !important;
+    color: #eaf7fa !important;
+    text-align: left !important;
+    text-decoration: none !important;
+    white-space: normal !important;
+  }
+
+  .vw-mobile-nav-target.vw-mobile-nav-open a:hover,
+  .vw-mobile-nav-target.vw-mobile-nav-open a:focus-visible {
+    background: rgba(35, 213, 195, 0.12) !important;
+    color: #ffffff !important;
+    outline: none !important;
+  }
+
+  header,
+  .site-header,
+  .topbar,
+  .navbar,
+  .nav-wrap {
+    position: relative;
+  }
+}
