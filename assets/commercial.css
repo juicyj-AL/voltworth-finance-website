@@ -1,0 +1,570 @@
+:root{
+  --vw-bg:#061019;
+  --vw-bg2:#091722;
+  --vw-panel:#0b1b28;
+  --vw-panel2:#0e2231;
+  --vw-border:rgba(91,153,177,.22);
+  --vw-teal:#10dec7;
+  --vw-teal2:#59f0df;
+  --vw-blue:#38a3ff;
+  --vw-text:#edf7fb;
+  --vw-muted:#9db4c2;
+  --vw-soft:#c9dce6;
+  --vw-warn:#f6c344;
+  --vw-danger:#ff5878;
+  --vw-radius:20px;
+  --vw-shadow:0 24px 70px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body.vw-commercial{
+  margin:0;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(16,222,199,.08),transparent 31%),
+    radial-gradient(circle at 92% 12%,rgba(56,163,255,.08),transparent 28%),
+    linear-gradient(180deg,var(--vw-bg),#07131d 60%,#061018);
+  color:var(--vw-text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.55;
+}
+.vw-shell{width:min(1180px,calc(100% - 38px));margin:0 auto}
+.vw-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px);
+  background:rgba(6,16,25,.86);
+  border-bottom:1px solid rgba(94,154,177,.14);
+}
+.vw-nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.vw-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--vw-text)}
+.vw-brand img{width:42px;height:42px;border-radius:50%;object-fit:cover}
+.vw-brand strong{display:block;font-size:1rem;letter-spacing:.01em}
+.vw-brand span{display:block;color:var(--vw-muted);font-size:.72rem;letter-spacing:.045em}
+.vw-links{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.vw-links a{
+  color:#b9ccd6;text-decoration:none;font-weight:700;font-size:.88rem;
+  padding:9px 12px;border-radius:10px
+}
+.vw-links a:hover,.vw-links a.active{color:var(--vw-text);background:rgba(255,255,255,.05)}
+.vw-links .vw-login{border:1px solid rgba(16,222,199,.28);color:var(--vw-teal2);margin-left:6px}
+.vw-hero{padding:86px 0 52px}
+.vw-hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
+.vw-kicker{display:inline-flex;gap:8px;align-items:center;color:var(--vw-teal2);font-weight:850;font-size:.77rem;letter-spacing:.12em;text-transform:uppercase}
+.vw-dot{width:8px;height:8px;border-radius:50%;background:var(--vw-teal);box-shadow:0 0 18px rgba(16,222,199,.75)}
+h1.vw-title{font-size:clamp(3rem,6vw,5.8rem);line-height:.95;letter-spacing:-.055em;margin:18px 0 24px}
+.vw-gradient{
+  background:linear-gradient(110deg,#f5fbff 0%,#b9e9ee 46%,#10dec7 88%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.vw-lead{font-size:clamp(1.03rem,2vw,1.23rem);color:#b5cbd6;max-width:690px;margin:0 0 28px}
+.vw-actions{display:flex;gap:12px;flex-wrap:wrap}
+.vw-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:46px;padding:0 18px;border-radius:12px;text-decoration:none;
+  color:var(--vw-text);font-weight:850;font-size:.91rem;
+  border:1px solid rgba(142,181,199,.22);background:rgba(255,255,255,.035)
+}
+.vw-btn.primary{background:linear-gradient(135deg,#10dec7,#17bfc5);color:#021114;border-color:transparent}
+.vw-btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.vw-proof{display:flex;gap:22px;flex-wrap:wrap;margin-top:28px;color:#7e9aa9;font-size:.8rem}
+.vw-proof strong{color:#cce2eb}
+.vw-terminal{
+  border:1px solid rgba(82,166,188,.25);border-radius:24px;padding:18px;
+  background:linear-gradient(180deg,rgba(11,28,41,.92),rgba(6,18,28,.98));
+  box-shadow:var(--vw-shadow);position:relative;overflow:hidden
+}
+.vw-terminal:before{
+  content:"";position:absolute;inset:-1px;pointer-events:none;
+  background:linear-gradient(135deg,rgba(16,222,199,.1),transparent 35%,rgba(56,163,255,.08));
+}
+.vw-terminal-top{display:flex;justify-content:space-between;align-items:center;padding:4px 4px 15px;color:#7895a5;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+.vw-terminal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.vw-stat{padding:16px;border:1px solid rgba(91,153,177,.16);border-radius:14px;background:rgba(255,255,255,.025)}
+.vw-stat span{display:block;color:#7896a7;font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.vw-stat strong{display:block;margin-top:5px;font-size:1.25rem}
+.vw-chart{height:170px;margin-top:12px;border-radius:14px;border:1px solid rgba(91,153,177,.16);background:
+  linear-gradient(rgba(58,103,124,.08) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(58,103,124,.08) 1px,transparent 1px),
+  linear-gradient(180deg,rgba(16,222,199,.03),transparent);
+  background-size:28px 28px;position:relative;overflow:hidden}
+.vw-chart svg{width:100%;height:100%}
+.vw-section{padding:62px 0}
+.vw-section.compact{padding:38px 0}
+.vw-section-head{max-width:770px;margin-bottom:28px}
+.vw-label{font-size:.74rem;font-weight:900;text-transform:uppercase;letter-spacing:.11em;color:var(--vw-teal2)}
+.vw-section h2{font-size:clamp(2rem,4vw,3.35rem);line-height:1.03;letter-spacing:-.035em;margin:8px 0 14px}
+.vw-section p{color:var(--vw-muted)}
+.vw-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.vw-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.vw-product{
+  min-height:360px;padding:26px;border:1px solid var(--vw-border);border-radius:var(--vw-radius);
+  background:linear-gradient(180deg,rgba(14,35,50,.84),rgba(8,22,32,.95));
+  display:flex;flex-direction:column;position:relative;overflow:hidden
+}
+.vw-product:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-90px;top:-90px;background:rgba(16,222,199,.045)}
+.vw-product h3{font-size:1.5rem;margin:18px 0 7px}
+.vw-product p{margin:0 0 18px}
+.vw-status{
+  width:max-content;padding:6px 9px;border-radius:999px;
+  background:rgba(16,222,199,.08);border:1px solid rgba(16,222,199,.18);
+  color:var(--vw-teal2);font-size:.66rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em
+}
+.vw-status.warn{background:rgba(246,195,68,.07);border-color:rgba(246,195,68,.2);color:#f8d878}
+.vw-product ul{padding-left:18px;color:#bdd0da;font-size:.89rem}
+.vw-product .vw-btn{margin-top:auto;width:max-content}
+.vw-feature{
+  padding:22px;border:1px solid rgba(91,153,177,.16);border-radius:16px;background:rgba(255,255,255,.025)
+}
+.vw-feature strong{display:block;margin-bottom:6px}
+.vw-feature p{margin:0;font-size:.9rem}
+.vw-band{
+  border:1px solid rgba(16,222,199,.18);border-radius:24px;padding:34px;
+  background:linear-gradient(120deg,rgba(16,222,199,.075),rgba(56,163,255,.035) 50%,rgba(255,255,255,.018))
+}
+.vw-band-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.vw-band h2{margin:0 0 8px;font-size:clamp(1.8rem,3vw,2.55rem)}
+.vw-band p{margin:0;max-width:700px}
+.vw-page-hero{padding:70px 0 30px}
+.vw-page-hero h1{font-size:clamp(2.7rem,5vw,4.8rem);line-height:1;letter-spacing:-.045em;margin:13px 0 18px}
+.vw-breadcrumb{color:#6e8a99;font-size:.8rem}
+.vw-breadcrumb a{color:#95b4c2;text-decoration:none}
+.vw-detail-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:start}
+.vw-panel{padding:26px;border:1px solid var(--vw-border);border-radius:18px;background:rgba(10,27,39,.72)}
+.vw-panel h3{margin-top:0}
+.vw-list{display:grid;gap:10px;padding:0;margin:18px 0;list-style:none}
+.vw-list li{padding:13px 14px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(100,160,183,.12);color:#bfd2dc}
+.vw-pricing{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.vw-price-card{padding:24px;border:1px solid var(--vw-border);border-radius:18px;background:rgba(10,27,39,.76);min-height:340px;display:flex;flex-direction:column}
+.vw-price-card.featured{border-color:rgba(16,222,199,.34);box-shadow:0 0 0 1px rgba(16,222,199,.08)}
+.vw-price-card h3{font-size:1.3rem;margin:14px 0 5px}
+.vw-price{font-size:1.8rem;font-weight:900;margin:16px 0 4px}
+.vw-price-note{color:#7896a6;font-size:.78rem}
+.vw-notice{padding:17px 18px;border-radius:14px;border:1px solid rgba(246,195,68,.18);background:rgba(246,195,68,.05);color:#d8c48e;font-size:.87rem}
+.vw-footer{margin-top:58px;border-top:1px solid rgba(94,154,177,.14);padding:38px 0 48px;background:rgba(2,10,16,.32)}
+.vw-footer-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:34px}
+.vw-footer h4{margin:0 0 11px;font-size:.82rem;color:#d7e7ee}
+.vw-footer a{display:block;color:#819eac;text-decoration:none;font-size:.8rem;margin:7px 0}
+.vw-footer p{color:#7893a2;font-size:.78rem;margin:10px 0 0;max-width:520px}
+.vw-footer-brand{display:flex;align-items:center;gap:10px;font-weight:850}
+.vw-footer-brand img{width:32px;height:32px;border-radius:50%}
+.vw-copyright{margin-top:28px;padding-top:18px;border-top:1px solid rgba(94,154,177,.1);color:#607d8d;font-size:.73rem}
+@media(max-width:980px){
+  .vw-hero-grid,.vw-detail-grid{grid-template-columns:1fr}
+  .vw-grid-3{grid-template-columns:1fr 1fr}
+  .vw-grid-4,.vw-pricing{grid-template-columns:1fr 1fr}
+  .vw-links a:not(.vw-login){display:none}
+}
+@media(max-width:640px){
+  .vw-shell{width:min(100% - 24px,1180px)}
+  .vw-nav{height:68px}
+  .vw-brand span{display:none}
+  .vw-hero{padding:58px 0 34px}
+  .vw-grid-3,.vw-grid-4,.vw-pricing,.vw-terminal-grid{grid-template-columns:1fr}
+  .vw-band-grid,.vw-footer-grid{grid-template-columns:1fr}
+  .vw-product{min-height:0}
+  .vw-actions .vw-btn{width:100%}
+}
+/* VOLT_WORTH_COMMERCIAL_V2_1_LEGACY_BRIDGE */
+.vw-legacy-page main{padding-bottom:28px}
+.vw-legacy-page main .container{width:min(1100px,calc(100% - 38px));margin-left:auto;margin-right:auto}
+.vw-legacy-page main h1,
+.vw-legacy-page main h2,
+.vw-legacy-page main h3{color:var(--vw-text)}
+.vw-legacy-page main p,
+.vw-legacy-page main li{color:#a9c2cf}
+.vw-legacy-page main a{color:var(--vw-teal2)}
+.vw-legacy-page main .section{padding-top:50px;padding-bottom:50px}
+.vw-legacy-page main .card,
+.vw-legacy-page main .contact-card,
+.vw-legacy-page main .policy-callout,
+.vw-legacy-page main .audit-box,
+.vw-legacy-page main .callout,
+.vw-legacy-page main .feature-band,
+.vw-legacy-page main .compliance-panel,
+.vw-legacy-page main details{
+  border-color:rgba(91,153,177,.20)!important;
+  background:linear-gradient(180deg,rgba(14,35,50,.76),rgba(8,22,32,.92))!important;
+  box-shadow:none!important
+}
+.vw-legacy-page main .button,
+.vw-legacy-page main a.button{
+  border-radius:12px!important;
+  border:1px solid rgba(16,222,199,.25)!important;
+  background:rgba(255,255,255,.035)!important;
+  color:var(--vw-text)!important
+}
+.vw-legacy-page main .button.primary,
+.vw-legacy-page main a.button.primary{
+  background:linear-gradient(135deg,#10dec7,#17bfc5)!important;
+  color:#021114!important;
+  border-color:transparent!important
+}
+.vw-legacy-page main .section-label{color:var(--vw-teal2)!important}
+.vw-legacy-page main .hero,
+.vw-legacy-page main .page-hero{padding-top:66px!important}
+@media(max-width:640px){
+  .vw-legacy-page main .container{width:min(100% - 24px,1100px)}
+}
+/* VOLT_WORTH_COMMERCIAL_V2_1_LEGACY_BRIDGE_END */
+/* VOLT_WORTH_COMMERCIAL_V2_2_REAL_PRODUCT_PRESENTATION */
+.vw-real-product{margin:0}
+.vw-real-product figcaption,
+.vw-showcase-feature figcaption,
+.vw-showcase-card figcaption{
+  color:#7898a8;
+  font-size:.78rem;
+  margin-top:10px;
+  line-height:1.5
+}
+.vw-product-window{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(74,166,187,.28);
+  border-radius:22px;
+  background:#04131d;
+  box-shadow:0 26px 70px rgba(0,0,0,.34)
+}
+.vw-product-windowbar{
+  min-height:40px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:12px;
+  align-items:center;
+  padding:0 14px;
+  background:linear-gradient(180deg,rgba(15,39,53,.98),rgba(8,27,39,.98));
+  border-bottom:1px solid rgba(79,157,181,.18);
+  color:#9ab7c5;
+  font-size:.68rem
+}
+.vw-product-windowbar span{display:flex;gap:5px}
+.vw-product-windowbar i{
+  display:block;width:7px;height:7px;border-radius:50%;
+  background:rgba(126,166,184,.35)
+}
+.vw-product-windowbar strong{color:#dff4f7;font-size:.72rem;letter-spacing:.02em}
+.vw-product-windowbar em{text-align:right;font-style:normal;color:#6e91a2;text-transform:uppercase;letter-spacing:.08em;font-size:.58rem}
+.vw-product-window img{
+  display:block;
+  width:100%;
+  height:auto;
+  background:#03121b
+}
+.vw-real-product-home .vw-product-window img{
+  aspect-ratio:1.355/1;
+  object-fit:cover;
+  object-position:top center
+}
+.vw-real-product-home figcaption{text-align:center}
+.vw-product-showcase{padding-top:28px}
+.vw-showcase-feature{margin:0 0 28px}
+.vw-showcase-feature .vw-product-window img{
+  max-height:720px;
+  object-fit:cover;
+  object-position:top center
+}
+.vw-screenshot-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  margin-top:22px
+}
+.vw-showcase-card{margin:0}
+.vw-product-window.compact{border-radius:17px;box-shadow:0 18px 48px rgba(0,0,0,.24)}
+.vw-product-window.compact img{
+  aspect-ratio:1.34/1;
+  object-fit:cover;
+  object-position:top center
+}
+.vw-showcase-card figcaption{
+  padding:0 4px;
+  font-size:.82rem
+}
+.vw-showcase-card figcaption strong{color:#d9edf3}
+.vw-product-proof{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:32px
+}
+.vw-product-proof>div{
+  padding:20px;
+  border:1px solid rgba(91,153,177,.16);
+  border-radius:16px;
+  background:rgba(255,255,255,.024)
+}
+.vw-product-proof span{
+  display:block;
+  margin-bottom:12px;
+  color:var(--vw-teal2);
+  font-size:.67rem;
+  font-weight:900;
+  letter-spacing:.1em
+}
+.vw-product-proof strong{display:block;font-size:1rem}
+.vw-product-proof p{margin:5px 0 0;font-size:.84rem}
+@media(max-width:980px){
+  .vw-real-product-home{margin-top:8px}
+}
+@media(max-width:720px){
+  .vw-screenshot-grid,.vw-product-proof{grid-template-columns:1fr}
+  .vw-product-windowbar{grid-template-columns:1fr auto}
+  .vw-product-windowbar em{display:none}
+}
+/* VOLT_WORTH_COMMERCIAL_V2_2_REAL_PRODUCT_PRESENTATION_END */
+/* VOLT_WORTH_COMMERCIAL_V2_3_ACCESS_ARCHITECTURE */
+.vw-pricing-v23{grid-template-columns:repeat(2,1fr)}
+.vw-pricing-v23 .vw-price-card{min-height:460px}
+.vw-access-table-wrap{
+  overflow-x:auto;
+  margin:20px 0;
+  border:1px solid rgba(91,153,177,.17);
+  border-radius:16px
+}
+.vw-access-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:760px;
+  background:rgba(5,19,28,.62)
+}
+.vw-access-table th,
+.vw-access-table td{
+  padding:14px 15px;
+  border-bottom:1px solid rgba(91,153,177,.12);
+  border-right:1px solid rgba(91,153,177,.09);
+  text-align:left;
+  font-size:.83rem
+}
+.vw-access-table th{
+  color:#dff2f7;
+  background:rgba(16,222,199,.045);
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.06em
+}
+.vw-access-table td{color:#9eb8c5}
+.vw-account-entry-grid{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:20px;
+  align-items:start
+}
+.vw-login-preview label{
+  display:block;
+  margin:17px 0 6px;
+  color:#9eb9c7;
+  font-size:.75rem;
+  font-weight:800
+}
+.vw-fake-input{
+  min-height:46px;
+  padding:13px 14px;
+  border:1px solid rgba(91,153,177,.2);
+  border-radius:11px;
+  color:#688696;
+  background:rgba(0,0,0,.16);
+  font-size:.84rem
+}
+.vw-disabled-button,
+.vw-disabled-link{
+  opacity:.62;
+  cursor:not-allowed;
+  pointer-events:none
+}
+.vw-login-preview .vw-btn{width:100%;margin-top:20px}
+.vw-micro{font-size:.72rem!important;color:#688695!important}
+.vw-account-shell{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:18px
+}
+.vw-account-nav{
+  padding:20px;
+  border:1px solid rgba(91,153,177,.17);
+  border-radius:17px;
+  background:rgba(5,19,28,.7);
+  display:flex;
+  flex-direction:column;
+  gap:7px
+}
+.vw-account-nav strong{padding:4px 7px 14px}
+.vw-account-nav span{
+  padding:10px 11px;
+  color:#7898a8;
+  border-radius:10px;
+  font-size:.82rem
+}
+.vw-account-nav span.active{
+  color:#dff7f5;
+  background:rgba(16,222,199,.08);
+  border:1px solid rgba(16,222,199,.14)
+}
+.vw-account-content{
+  padding:24px;
+  border:1px solid rgba(91,153,177,.17);
+  border-radius:17px;
+  background:rgba(5,19,28,.58)
+}
+.vw-account-topline{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:start;
+  margin-bottom:22px
+}
+.vw-account-topline h2{margin:4px 0 0}
+.vw-account-actions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:18px
+}
+.vw-access-choice-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px
+}
+.vw-access-choice{
+  padding:28px;
+  border:1px solid rgba(91,153,177,.18);
+  border-radius:20px;
+  background:linear-gradient(180deg,rgba(14,35,50,.8),rgba(8,22,32,.94))
+}
+.vw-access-choice.featured{border-color:rgba(16,222,199,.3)}
+.vw-access-choice h2{margin:16px 0 8px}
+.vw-download-note{
+  margin-top:20px;
+  padding:18px 20px;
+  border:1px solid rgba(246,195,68,.16);
+  border-radius:14px;
+  background:rgba(246,195,68,.04)
+}
+.vw-download-note strong{color:#f0d580}
+.vw-download-note p{margin:5px 0 0}
+.vw-faq-list{
+  max-width:900px
+}
+.vw-faq-list details{
+  padding:0;
+  margin:0 0 11px;
+  border:1px solid rgba(91,153,177,.17);
+  border-radius:14px;
+  background:rgba(255,255,255,.02);
+  overflow:hidden
+}
+.vw-faq-list summary{
+  padding:17px 19px;
+  cursor:pointer;
+  color:#d9eef4;
+  font-weight:850
+}
+.vw-faq-list details p{
+  margin:0;
+  padding:0 19px 18px;
+  color:#91adbb
+}
+@media(max-width:980px){
+  .vw-pricing-v23,
+  .vw-account-entry-grid,
+  .vw-access-choice-grid{grid-template-columns:1fr}
+  .vw-account-shell{grid-template-columns:1fr}
+  .vw-account-nav{display:grid;grid-template-columns:repeat(2,1fr)}
+  .vw-account-actions{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .vw-pricing-v23{grid-template-columns:1fr}
+}
+/* VOLT_WORTH_COMMERCIAL_V2_3_ACCESS_ARCHITECTURE_END */
+/* VOLT_WORTH_COMMERCIAL_V2_4_VISUAL_POLISH */
+.vw-mini-link,
+.vw-mini-link:visited{
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  margin-top:7px;
+  color:var(--vw-teal2)!important;
+  text-decoration:none;
+  font-size:.76rem;
+  font-weight:850;
+  letter-spacing:.01em
+}
+.vw-mini-link:hover{
+  color:#d9fffb!important;
+  text-decoration:underline;
+  text-underline-offset:3px
+}
+.vw-account-content .vw-feature{
+  min-height:126px;
+  display:flex;
+  flex-direction:column
+}
+.vw-account-content .vw-feature p{
+  margin:4px 0 0
+}
+.vw-account-content .vw-feature .vw-mini-link{
+  margin-top:auto;
+  padding-top:9px
+}
+.vw-account-actions .vw-panel{
+  min-height:210px;
+  display:flex;
+  flex-direction:column
+}
+.vw-account-actions .vw-panel .vw-btn{
+  margin-top:auto;
+  width:max-content
+}
+.vw-disabled-action,
+.vw-disabled-action:visited{
+  background:rgba(255,255,255,.025)!important;
+  border-color:rgba(126,161,178,.16)!important;
+  color:#6f8794!important;
+  box-shadow:none!important;
+  filter:none!important;
+  opacity:.78!important
+}
+.vw-access-choice.featured .vw-disabled-action{
+  background:rgba(16,222,199,.035)!important;
+  border-color:rgba(16,222,199,.12)!important;
+  color:#7899a5!important
+}
+.vw-pricing-v23 .vw-price-card{
+  box-shadow:0 16px 44px rgba(0,0,0,.12)
+}
+.vw-pricing-v23 .vw-price-card.featured{
+  box-shadow:0 18px 52px rgba(16,222,199,.045)
+}
+.vw-faq-list summary:hover{
+  background:rgba(16,222,199,.025)
+}
+/* VOLT_WORTH_COMMERCIAL_V2_4_VISUAL_POLISH_END */
+/* VOLT_WORTH_COMMERCIAL_V2_5_PROPOSED_PRICING */
+.vw-scanner-pricing-v25{grid-template-columns:1fr 1fr;max-width:980px;margin:0 auto}
+.vw-scanner-pricing-v25 .vw-price-card{min-height:610px}
+.vw-price small{color:#91aebb;font-size:.8rem;font-weight:700}
+.vw-price-annual{margin:0 0 13px;color:#cfe1e9;font-size:.9rem;font-weight:800}
+.vw-price-annual span{display:inline-flex;margin-left:7px;padding:4px 7px;border-radius:999px;color:var(--vw-teal2);background:rgba(16,222,199,.06);border:1px solid rgba(16,222,199,.15);font-size:.63rem;text-transform:uppercase;letter-spacing:.05em}
+.vw-pro-card{border-color:rgba(16,222,199,.38)!important;box-shadow:0 22px 62px rgba(16,222,199,.055)!important}
+.vw-trial-band{margin-top:22px;padding:28px;border:1px solid rgba(16,222,199,.2);border-radius:20px;background:linear-gradient(125deg,rgba(16,222,199,.065),rgba(10,27,39,.86) 45%,rgba(56,163,255,.035));display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.vw-trial-band h2{margin:7px 0 9px;font-size:clamp(1.8rem,3vw,2.6rem)}
+.vw-trial-band p{margin:0}
+.vw-trial-specs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vw-trial-specs span{padding:14px;border:1px solid rgba(91,153,177,.15);border-radius:12px;color:#7897a7;font-size:.73rem;background:rgba(0,0,0,.11)}
+.vw-trial-specs strong{display:block;color:#def2f5;font-size:.95rem;margin-bottom:3px}
+@media(max-width:820px){.vw-scanner-pricing-v25,.vw-trial-band{grid-template-columns:1fr}.vw-scanner-pricing-v25 .vw-price-card{min-height:0}}
+@media(max-width:520px){.vw-trial-specs{grid-template-columns:1fr}}
+/* VOLT_WORTH_COMMERCIAL_V2_5_PROPOSED_PRICING_END */
+
+/* VW_PUBLIC_PRELAUNCH_V1 */
+.vw-public-prelaunch {
+  margin: 0 auto 28px;
+  max-width: 1180px;
+  padding: 14px 18px;
+  border: 1px solid rgba(28, 209, 194, 0.38);
+  border-radius: 12px;
+  background: rgba(10, 37, 48, 0.82);
+  color: #c8dde3;
+  font-size: 0.93rem;
+  line-height: 1.55;
+}
+.vw-public-prelaunch strong {
+  color: #23d5c3;
+}
