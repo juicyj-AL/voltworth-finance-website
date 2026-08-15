@@ -1,100 +1,137 @@
-/* VW_MOBILE_NAV_V1 */
+/* VW_MOBILE_NAV_V1_1_REPAIR */
 (function () {
   "use strict";
 
-  var PRIMARY_HREFS = [
-    "index.html",
-    "products.html",
-    "pricing.html",
-    "faq.html",
-    "learn.html",
-    "about.html"
+  var NAV_ITEMS = [
+    ["Home", "index.html"],
+    ["Products", "products.html"],
+    ["Pricing", "pricing.html"],
+    ["FAQ", "faq.html"],
+    ["Learn", "learn.html"],
+    ["About", "about.html"],
+    ["Login", "login.html"]
   ];
 
-  function normalizedHref(anchor) {
-    var raw = (anchor.getAttribute("href") || "").trim();
-    raw = raw.split("#")[0].split("?")[0];
-    raw = raw.replace(/^\.?\//, "");
-    return raw;
+  function existingHref(href) {
+    return document.querySelector('a[href="' + href + '"]');
   }
 
-  function findPrimaryNav() {
-    var anchors = Array.prototype.slice.call(document.querySelectorAll("a[href]"));
-    var required = anchors.filter(function (a) {
-      return PRIMARY_HREFS.indexOf(normalizedHref(a)) !== -1;
-    });
-
-    if (required.length < 4) return null;
-
-    var node = required[0].parentElement;
-    while (node && node !== document.body) {
-      var count = 0;
-      for (var i = 0; i < required.length; i++) {
-        if (node.contains(required[i])) count++;
-      }
-
-      if (count >= 4) {
-        var directLinks = node.querySelectorAll("a[href]").length;
-        if (directLinks <= 12) return node;
-      }
-      node = node.parentElement;
-    }
-    return null;
-  }
-
-  function closeMenu(button, nav) {
-    nav.classList.remove("vw-mobile-nav-open");
+  function closeMenu(button, panel, backdrop) {
+    panel.classList.remove("vw-mobile-menu-panel-open");
+    backdrop.classList.remove("vw-mobile-menu-backdrop-open");
     button.classList.remove("vw-mobile-menu-open");
     button.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("vw-mobile-menu-body-open");
+  }
+
+  function openMenu(button, panel, backdrop) {
+    panel.classList.add("vw-mobile-menu-panel-open");
+    backdrop.classList.add("vw-mobile-menu-backdrop-open");
+    button.classList.add("vw-mobile-menu-open");
+    button.setAttribute("aria-expanded", "true");
+    document.body.classList.add("vw-mobile-menu-body-open");
   }
 
   function init() {
-    var nav = findPrimaryNav();
-    if (!nav || nav.classList.contains("vw-mobile-nav-target")) return;
+    var oldButton = document.querySelector(".vw-mobile-menu-toggle");
+    if (oldButton) oldButton.remove();
 
-    nav.classList.add("vw-mobile-nav-target");
-    nav.id = nav.id || "vw-primary-mobile-nav";
+    var oldPanel = document.querySelector(".vw-mobile-menu-panel");
+    if (oldPanel) oldPanel.remove();
+
+    var oldBackdrop = document.querySelector(".vw-mobile-menu-backdrop");
+    if (oldBackdrop) oldBackdrop.remove();
+
+    var primaryNav = document.querySelector(".vw-mobile-nav-target");
+
+    if (!primaryNav) {
+      var homeAnchor = existingHref("index.html");
+      if (!homeAnchor) return;
+
+      var node = homeAnchor.parentElement;
+      while (node && node !== document.body) {
+        var count = 0;
+        for (var i = 0; i < NAV_ITEMS.length; i++) {
+          if (node.querySelector('a[href="' + NAV_ITEMS[i][1] + '"]')) count++;
+        }
+        if (count >= 4) {
+          primaryNav = node;
+          break;
+        }
+        node = node.parentElement;
+      }
+    }
+
+    if (!primaryNav) return;
+
+    primaryNav.classList.add("vw-mobile-nav-target");
 
     var button = document.createElement("button");
     button.type = "button";
     button.className = "vw-mobile-menu-toggle";
-    button.setAttribute("aria-controls", nav.id);
     button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "vw-mobile-menu-panel");
     button.setAttribute("aria-label", "Open navigation menu");
     button.innerHTML =
       '<span class="vw-mobile-menu-bars" aria-hidden="true">' +
       '<span></span><span></span><span></span>' +
       '</span><span class="vw-mobile-menu-label">Menu</span>';
 
-    nav.parentNode.insertBefore(button, nav);
+    var panel = document.createElement("nav");
+    panel.id = "vw-mobile-menu-panel";
+    panel.className = "vw-mobile-menu-panel";
+    panel.setAttribute("aria-label", "Mobile navigation");
 
-    button.addEventListener("click", function () {
-      var willOpen = !nav.classList.contains("vw-mobile-nav-open");
-      if (willOpen) {
-        nav.classList.add("vw-mobile-nav-open");
-        button.classList.add("vw-mobile-menu-open");
-        button.setAttribute("aria-expanded", "true");
+    NAV_ITEMS.forEach(function (item) {
+      var source = existingHref(item[1]);
+      if (!source) return;
+
+      var link = document.createElement("a");
+      link.href = source.getAttribute("href");
+      link.textContent = item[0];
+      link.className = "vw-mobile-menu-link";
+      panel.appendChild(link);
+    });
+
+    var backdrop = document.createElement("div");
+    backdrop.className = "vw-mobile-menu-backdrop";
+    backdrop.setAttribute("aria-hidden", "true");
+
+    primaryNav.parentNode.insertBefore(button, primaryNav);
+    document.body.appendChild(backdrop);
+    document.body.appendChild(panel);
+
+    button.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (panel.classList.contains("vw-mobile-menu-panel-open")) {
+        closeMenu(button, panel, backdrop);
       } else {
-        closeMenu(button, nav);
+        openMenu(button, panel, backdrop);
       }
     });
 
-    nav.addEventListener("click", function (event) {
-      if (event.target.closest("a")) closeMenu(button, nav);
+    panel.addEventListener("click", function (event) {
+      if (event.target.closest("a")) {
+        closeMenu(button, panel, backdrop);
+      }
     });
 
-    document.addEventListener("click", function (event) {
-      if (!nav.classList.contains("vw-mobile-nav-open")) return;
-      if (nav.contains(event.target) || button.contains(event.target)) return;
-      closeMenu(button, nav);
+    backdrop.addEventListener("click", function () {
+      closeMenu(button, panel, backdrop);
     });
 
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") closeMenu(button, nav);
+      if (event.key === "Escape") {
+        closeMenu(button, panel, backdrop);
+      }
     });
 
     window.addEventListener("resize", function () {
-      if (window.innerWidth > 860) closeMenu(button, nav);
+      if (window.innerWidth > 860) {
+        closeMenu(button, panel, backdrop);
+      }
     });
   }
 

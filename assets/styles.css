@@ -373,3 +373,85 @@ details p{margin:0;padding:0 18px 18px;color:var(--muted)}
     position: relative;
   }
 }
+
+/* ==========================================================================
+   VW_MOBILE_NAV_V1_1_REPAIR
+   Dedicated fixed mobile menu panel appended directly to body.
+   ========================================================================== */
+
+.vw-mobile-menu-panel,
+.vw-mobile-menu-backdrop {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .vw-mobile-menu-toggle {
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent;
+    position: relative !important;
+    z-index: 2147483001 !important;
+  }
+
+  .vw-mobile-menu-backdrop {
+    display: none;
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0, 0, 0, 0.42) !important;
+    z-index: 2147482998 !important;
+    pointer-events: auto !important;
+  }
+
+  .vw-mobile-menu-backdrop.vw-mobile-menu-backdrop-open {
+    display: block !important;
+  }
+
+  .vw-mobile-menu-panel {
+    display: none;
+    position: fixed !important;
+    top: 76px !important;
+    left: 12px !important;
+    right: 12px !important;
+    max-height: calc(100vh - 92px) !important;
+    overflow-y: auto !important;
+    padding: 10px !important;
+    border: 1px solid rgba(35, 213, 195, 0.42) !important;
+    border-radius: 14px !important;
+    background: rgba(7, 24, 33, 0.995) !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.56) !important;
+    z-index: 2147483000 !important;
+    pointer-events: auto !important;
+  }
+
+  .vw-mobile-menu-panel.vw-mobile-menu-panel-open {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+
+  .vw-mobile-menu-panel .vw-mobile-menu-link {
+    display: block !important;
+    width: 100% !important;
+    padding: 13px 14px !important;
+    margin: 0 !important;
+    border-radius: 9px !important;
+    color: #eef9fb !important;
+    background: transparent !important;
+    text-align: left !important;
+    text-decoration: none !important;
+    font-weight: 650 !important;
+    line-height: 1.25 !important;
+    pointer-events: auto !important;
+  }
+
+  .vw-mobile-menu-panel .vw-mobile-menu-link:hover,
+  .vw-mobile-menu-panel .vw-mobile-menu-link:focus-visible {
+    background: rgba(35, 213, 195, 0.13) !important;
+    color: #ffffff !important;
+    outline: none !important;
+  }
+
+  body.vw-mobile-menu-body-open {
+    overflow: hidden !important;
+  }
+}
