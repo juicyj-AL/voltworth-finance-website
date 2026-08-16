@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Account Preview | VoltWorth Finance</title>
-<meta name="description" content="Static preview of the future VoltWorth subscriber account portal.">
+<title>Account | VoltWorth Finance</title>
+<meta name="description" content="Your VoltWorth Finance account, plan access, entitlements, and usage.">
 <link rel="icon" href="assets/favicon.png">
 <link rel="stylesheet" href="assets/commercial.css">
-  <link rel="stylesheet" href="assets/mobile-menu-v14.css">
+<link rel="stylesheet" href="assets/mobile-menu-v14.css">
+<script src="assets/auth.js" defer></script>
 </head>
 <body class="vw-commercial">
 <header class="vw-header">
@@ -23,8 +24,8 @@
       <a href="faq.html">FAQ</a>
       <a href="learn.html">Learn</a>
       <a href="about.html">About</a>
-      <button class="vw-mobile-menu-toggle-v14" type="button" aria-expanded="false" aria-label="Open navigation menu">Menu</button>
-      <a class="vw-login" href="login.html">Login</a>
+<button class="vw-mobile-menu-toggle-v14" type="button" aria-expanded="false" aria-label="Open navigation menu">Menu</button>
+<a class="vw-login active" href="account.html">Account</a>
     </nav>
   </div>
 </header>
@@ -36,52 +37,117 @@
   <a href="faq.html">FAQ</a>
   <a href="learn.html">Learn</a>
   <a href="about.html">About</a>
-  <a href="login.html">Login</a>
+  <a href="account.html">Account</a>
 </nav>
 <main>
 <div class="vw-public-prelaunch">
-  <strong>Pre-launch preview.</strong>
-  Subscriptions, account access, downloads and automated-trading products are not yet available.
+  <strong>Your VoltWorth account is ready.</strong>
+  Register, verify your email, sign in, review trial status, product access and usage, and sign out securely. Paid subscriptions, billing, production downloads and automated-trading customer access remain pre-launch.
 </div>
-<section class="vw-page-hero">
+
+<section class="vw-page-hero vw-account-hero">
   <div class="vw-shell">
-    <div class="vw-breadcrumb"><a href="index.html">Home</a> / Account Preview</div>
-    <div class="vw-label">Subscriber Portal Preview</div>
-    <h1>Your VoltWorth products in one place.</h1>
-    <p class="vw-lead">This is a static preview of the account portal architecture. No customer account, billing system, or authentication backend is connected.</p>
+    <div class="vw-breadcrumb"><a href="index.html">Home</a> / Account</div>
+    <div class="vw-label">Subscriber Portal</div>
+    <h1>Your VoltWorth account.</h1>
+    <p class="vw-lead">Review your account status, current plan access, product entitlements, and usage.</p>
   </div>
 </section>
 
 <section class="vw-section compact">
   <div class="vw-shell">
-    <div class="vw-account-shell">
+    <div id="vw-account-message" class="vw-auth-message" role="status" aria-live="polite" hidden></div>
+
+    <div id="vw-account-loading" class="vw-panel vw-account-loading">
+      <div class="vw-status">Connecting</div>
+      <h3>Loading account...</h3>
+      <p>Securely requesting your current VoltWorth account state.</p>
+    </div>
+
+    <div id="vw-account-app" class="vw-account-shell" hidden>
       <aside class="vw-account-nav">
         <strong>Account</strong>
-        <span class="active">Overview</span>
-        <span>Products</span>
-        <span>Subscription</span>
-        <span>Downloads</span>
-        <span>Billing</span>
-        <span>Security</span>
-        <span>Support</span>
+        <a class="active" href="#overview">Overview</a>
+        <a href="#product-access">Plan Access</a>
+        <a href="#usage">Usage</a>
+        <a href="#security">Security</a>
+        <a href="contact.html">Support</a>
       </aside>
 
-      <div class="vw-account-content">
+      <div class="vw-account-content" id="overview">
         <div class="vw-account-topline">
-          <div><span class="vw-label">Example Subscriber</span><h2>Account Overview</h2></div>
-          <div class="vw-status">Prototype</div>
+          <div>
+            <span id="vw-account-email" class="vw-label">VoltWorth Subscriber</span>
+            <h2>Account Overview</h2>
+          </div>
+          <div id="vw-account-status-badge" class="vw-status">Loading</div>
         </div>
 
-        <div class="vw-grid-3">
-          <div class="vw-feature"><strong>VoltWorth Scanner</strong><p>Example entitlement: Active</p><a class="vw-mini-link" href="scanner.html">View product</a></div>
-          <div class="vw-feature"><strong>VoltWorth Alpha</strong><p>Coming Soon</p><a class="vw-mini-link" href="alpha.html">Preview product</a></div>
-          <div class="vw-feature"><strong>VoltWorth Options Alpha</strong><p>Coming Soon</p><a class="vw-mini-link" href="options.html">Preview product</a></div>
+        <div class="vw-grid-3 vw-account-summary-grid">
+          <div class="vw-feature">
+            <strong>Account Status</strong>
+            <p id="vw-account-status">?</p>
+          </div>
+
+          <div class="vw-feature">
+            <strong>Plan</strong>
+            <p id="vw-account-plan">?</p>
+          </div>
+
+          <div class="vw-feature">
+            <strong>Access</strong>
+            <p id="vw-account-access">?</p>
+          </div>
+        </div>
+
+        <div class="vw-auth-account-section" id="usage"><div class="vw-section-head">
+            <div class="vw-label">Usage</div>
+            <h3>Current account usage</h3>
+          </div>
+
+          <div class="vw-account-metrics">
+            <div class="vw-feature">
+              <strong>AI Analyses Used</strong>
+              <p id="vw-ai-used">?</p>
+            </div>
+
+            <div class="vw-feature">
+              <strong>AI Analyses Remaining</strong>
+              <p id="vw-ai-remaining">?</p>
+            </div>
+
+            <div class="vw-feature">
+              <strong>Session Expires</strong>
+              <p id="vw-session-expires">?</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="vw-auth-account-section" id="product-access"><div class="vw-section-head">
+            <div class="vw-label">Entitlements</div>
+            <h3>Product Access</h3>
+          </div>
+
+          <div id="vw-entitlement-list" class="vw-entitlement-list"></div>
         </div>
 
         <div class="vw-account-actions">
-          <div class="vw-panel"><h3>Web Access</h3><p>Future entitled subscribers will launch the browser dashboard from the account portal.</p><span class="vw-btn vw-disabled-link">Launch Dashboard - Preview</span></div>
-          <div class="vw-panel"><h3>Downloads</h3><p>Eligible plans may expose signed Windows installers and release information here.</p><a class="vw-btn" href="download.html">View Download Model</a></div>
-          <div class="vw-panel"><h3>Billing</h3><p>Future customer billing will be handled through a secure billing/customer portal.</p><span class="vw-btn vw-disabled-link">Manage Billing - Preview</span></div>
+          <div class="vw-panel">
+            <h3>VoltWorth Scanner</h3>
+            <p>Review the current Scanner product and access model.</p>
+            <a class="vw-btn" href="scanner.html">View Scanner</a>
+          </div>
+
+          <div class="vw-panel">
+            <h3>Pricing</h3>
+            <p>Review the current proposed Scanner and Scanner Pro pricing structure.</p>
+            <a class="vw-btn" href="pricing.html">View Pricing</a>
+          </div>
+
+          <div class="vw-panel" id="security"><h3>Security</h3>
+            <p>Sign out to remove this browser session and request revocation of the current server session.</p>
+            <button id="vw-logout-button" class="vw-btn" type="button">Sign Out</button>
+          </div>
         </div>
       </div>
     </div>
@@ -104,7 +170,7 @@
         <a href="complete.html">VoltWorth Complete</a>
         <a href="pricing.html">Pricing</a>
         <a href="download.html">Download</a>
-        <a href="account.html">Account Preview</a>
+        <a href="account.html">Account</a>
       </div>
       <div>
         <h4>Company &amp; Compliance</h4>

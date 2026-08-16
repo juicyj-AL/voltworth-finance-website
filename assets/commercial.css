@@ -568,3 +568,218 @@ h1.vw-title{font-size:clamp(3rem,6vw,5.8rem);line-height:.95;letter-spacing:-.05
 .vw-public-prelaunch strong {
   color: #23d5c3;
 }
+
+/* VOLT_WORTH_WEBSITE_AUTH_FOUNDATION_V1 */
+.vw-auth-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  align-items:start
+}
+.vw-auth-panel h3{
+  margin:7px 0 8px;
+  font-size:1.55rem
+}
+.vw-auth-panel>p{
+  margin:0 0 18px
+}
+.vw-auth-form{
+  display:grid;
+  gap:8px
+}
+.vw-auth-form label{
+  margin-top:10px;
+  color:#a5bfcb;
+  font-size:.76rem;
+  font-weight:850
+}
+.vw-auth-form input{
+  width:100%;
+  min-height:48px;
+  padding:12px 14px;
+  border:1px solid rgba(91,153,177,.24);
+  border-radius:11px;
+  outline:none;
+  background:rgba(0,0,0,.18);
+  color:var(--vw-text);
+  font:inherit
+}
+.vw-auth-form input:focus{
+  border-color:rgba(16,222,199,.62);
+  box-shadow:0 0 0 3px rgba(16,222,199,.08)
+}
+.vw-auth-form input::placeholder{
+  color:#607e8c
+}
+.vw-auth-form .vw-btn{
+  width:100%;
+  margin-top:15px;
+  cursor:pointer
+}
+.vw-auth-form .vw-btn:disabled,
+#vw-logout-button:disabled{
+  opacity:.66;
+  cursor:wait
+}
+.vw-auth-message{
+  margin:0 0 20px;
+  padding:14px 16px;
+  border-radius:12px;
+  border:1px solid rgba(91,153,177,.2);
+  background:rgba(255,255,255,.025);
+  color:#bfd2dc
+}
+.vw-auth-message.success{
+  color:#bff7e9;
+  border-color:rgba(16,222,199,.3);
+  background:rgba(16,222,199,.055)
+}
+.vw-auth-message.error{
+  color:#ffd2dc;
+  border-color:rgba(255,88,120,.3);
+  background:rgba(255,88,120,.055)
+}
+.vw-auth-message.info{
+  color:#c7e8f6;
+  border-color:rgba(56,163,255,.25);
+  background:rgba(56,163,255,.045)
+}
+.vw-auth-help{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-top:18px;
+  padding:14px 16px;
+  border:1px solid rgba(91,153,177,.14);
+  border-radius:12px;
+  color:#7898a8;
+  font-size:.78rem
+}
+.vw-auth-help strong{
+  color:#cce1e9
+}
+.vw-account-loading{
+  max-width:580px;
+  margin:0 auto
+}
+.vw-account-summary-grid{
+  margin-bottom:24px
+}
+.vw-auth-account-section{
+  margin-top:28px;
+  padding-top:24px;
+  border-top:1px solid rgba(91,153,177,.13)
+}
+.vw-auth-account-section .vw-section-head{
+  margin-bottom:16px
+}
+.vw-auth-account-section .vw-section-head h3{
+  margin:5px 0 0;
+  font-size:1.35rem
+}
+.vw-account-metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px
+}
+.vw-entitlement-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
+}
+.vw-entitlement-row{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  padding:13px 14px;
+  border:1px solid rgba(91,153,177,.14);
+  border-radius:12px;
+  background:rgba(255,255,255,.022)
+}
+.vw-entitlement-row strong{
+  color:#d8ebf1;
+  font-size:.82rem
+}
+.vw-entitlement-row span{
+  color:#7e9baa;
+  font-size:.75rem;
+  text-align:right
+}
+#vw-logout-button{
+  cursor:pointer
+}
+[hidden]{
+  display:none!important
+}
+@media(max-width:820px){
+  .vw-auth-grid,
+  .vw-account-metrics,
+  .vw-entitlement-list{
+    grid-template-columns:1fr
+  }
+  .vw-auth-help{
+    align-items:flex-start;
+    flex-direction:column
+  }
+}
+/* VOLT_WORTH_WEBSITE_AUTH_FOUNDATION_V1_END */
+/* VOLT_WORTH_AUTH_PRESENTATION_V1 */
+.vw-auth-hero{
+  padding:46px 0 16px
+}
+.vw-auth-hero h1{
+  max-width:980px;
+  font-size:clamp(2.55rem,4.6vw,4.15rem)
+}
+.vw-auth-hero .vw-lead{
+  margin-bottom:8px
+}
+.vw-auth-hero + .vw-section.compact{
+  padding-top:24px
+}
+@media(max-width:640px){
+  .vw-auth-hero{
+    padding:38px 0 12px
+  }
+  .vw-auth-hero h1{
+    font-size:clamp(2.25rem,11vw,3.35rem)
+  }
+  .vw-auth-hero + .vw-section.compact{
+    padding-top:18px
+  }
+}
+/* VOLT_WORTH_AUTH_PRESENTATION_V1_END */
+
+/* VOLT_WORTH_AUTH_CUSTOMER_POLISH_V1_1 */
+.vw-account-hero{
+  padding:48px 0 22px
+}
+.vw-account-nav a{
+  display:block;
+  padding:10px 11px;
+  color:#7898a8;
+  border-radius:10px;
+  font-size:.82rem;
+  text-decoration:none
+}
+.vw-account-nav a:hover{
+  color:#dff7f5;
+  background:rgba(16,222,199,.045)
+}
+.vw-account-nav a.active{
+  color:#dff7f5;
+  background:rgba(16,222,199,.08);
+  border:1px solid rgba(16,222,199,.14)
+}
+#overview,
+#usage,
+#product-access,
+#security{
+  scroll-margin-top:96px
+}
+@media(max-width:640px){
+  .vw-account-hero{
+    padding:38px 0 16px
+  }
+}
+/* VOLT_WORTH_AUTH_CUSTOMER_POLISH_V1_1_END */

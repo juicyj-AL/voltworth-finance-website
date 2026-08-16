@@ -4,10 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Login | VoltWorth Finance</title>
-<meta name="description" content="Preview of the future VoltWorth subscriber login and account access model.">
+<meta name="description" content="Sign in to your VoltWorth Finance account or create a new account.">
 <link rel="icon" href="assets/favicon.png">
 <link rel="stylesheet" href="assets/commercial.css">
-  <link rel="stylesheet" href="assets/mobile-menu-v14.css">
+<link rel="stylesheet" href="assets/mobile-menu-v14.css">
+<script src="assets/auth.js" defer></script>
 </head>
 <body class="vw-commercial">
 <header class="vw-header">
@@ -23,8 +24,8 @@
       <a href="faq.html">FAQ</a>
       <a href="learn.html">Learn</a>
       <a href="about.html">About</a>
-      <button class="vw-mobile-menu-toggle-v14" type="button" aria-expanded="false" aria-label="Open navigation menu">Menu</button>
-      <a class="vw-login" href="login.html">Login</a>
+<button class="vw-mobile-menu-toggle-v14" type="button" aria-expanded="false" aria-label="Open navigation menu">Menu</button>
+<a class="vw-login active" href="login.html">Login</a>
     </nav>
   </div>
 </header>
@@ -39,39 +40,99 @@
   <a href="login.html">Login</a>
 </nav>
 <main>
-<section class="vw-page-hero">
+<section class="vw-page-hero vw-auth-hero">
   <div class="vw-shell">
     <div class="vw-breadcrumb"><a href="index.html">Home</a> / Login</div>
     <div class="vw-label">VoltWorth Account</div>
-    <h1>One sign-in for your VoltWorth products.</h1>
-    <p class="vw-lead">The commercial platform is planned around one customer identity with separate product entitlements for Scanner, Alpha, Options Alpha, and Complete.</p>
+    <h1>One account for your VoltWorth access.</h1>
+    <p class="vw-lead">Sign in to an existing VoltWorth account or create a new account and verify your email before signing in.</p>
   </div>
 </section>
 
 <section class="vw-section compact">
-  <div class="vw-shell vw-account-entry-grid">
-    <div class="vw-panel vw-login-preview">
-      <div class="vw-status">Preview Only</div>
-      <h3>Subscriber Login</h3>
-      <label>Email</label>
-      <div class="vw-fake-input">name@example.com</div>
-      <label>Password</label>
-      <div class="vw-fake-input">Password protected by future authentication provider</div>
-      <button class="vw-btn primary vw-disabled-button" type="button" disabled>Sign In - Not Active</button>
-      <p class="vw-micro">This static prototype does not collect credentials or submit any form.</p>
+  <div class="vw-shell">
+    <div id="vw-auth-page-message" class="vw-auth-message" role="status" aria-live="polite" hidden></div>
+
+    <div class="vw-auth-grid">
+      <div class="vw-panel vw-auth-panel">
+        <div class="vw-label">Existing Account</div>
+        <h3>Sign In</h3>
+        <p>Use the email address and password associated with your VoltWorth account.</p>
+
+        <form id="vw-login-form" class="vw-auth-form" novalidate>
+          <label for="vw-login-email">Email</label>
+          <input
+            id="vw-login-email"
+            name="email"
+            type="email"
+            autocomplete="username"
+            inputmode="email"
+            required
+          >
+
+          <label for="vw-login-password">Password</label>
+          <input
+            id="vw-login-password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          >
+
+          <button id="vw-login-submit" class="vw-btn primary" type="submit">Sign In</button>
+        </form>
+
+        <p class="vw-micro">For security, your sign-in is limited to your current browser session and is cleared when you sign out.</p>
+      </div>
+
+      <div class="vw-panel vw-auth-panel">
+        <div class="vw-label">New Account</div>
+        <h3>Create Account</h3>
+        <p>Create your VoltWorth identity. We will send a verification email before account access becomes active.</p>
+
+        <form id="vw-register-form" class="vw-auth-form" novalidate>
+          <label for="vw-register-email">Email</label>
+          <input
+            id="vw-register-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            inputmode="email"
+            required
+          >
+
+          <label for="vw-register-password">Password (12 to 200 characters)</label>
+          <input
+            id="vw-register-password"
+            name="password"
+            type="password"
+            autocomplete="new-password"
+            minlength="12"
+            maxlength="200"
+            required
+          >
+
+          <label for="vw-register-confirm">Confirm Password</label>
+          <input
+            id="vw-register-confirm"
+            name="confirm_password"
+            type="password"
+            autocomplete="new-password"
+            minlength="12"
+            maxlength="200"
+            required
+          >
+
+          <button id="vw-register-submit" class="vw-btn primary" type="submit">Create Account</button>
+        </form>
+
+        <p class="vw-micro">Registration does not collect payment-card information. After registration, use the verification link sent to your email, then return here to sign in.</p>
+      </div>
     </div>
 
-    <div class="vw-panel">
-      <h3>What the account will control</h3>
-      <ul class="vw-list">
-        <li>Active subscription and product entitlements</li>
-        <li>Launch access to the VoltWorth web dashboard</li>
-        <li>Authorized Windows downloads where included</li>
-        <li>Billing/customer portal access</li>
-        <li>Security, sessions, and password/account recovery</li>
-        <li>User-specific holdings, history, and preferences where applicable</li>
-      </ul>
-      <a class="vw-btn" href="account.html">Preview Account Portal</a>
+    <div class="vw-auth-help">
+      <strong>Account security</strong>
+      <span>Never send your VoltWorth password or account token by email, chat, or social media.</span>
     </div>
   </div>
 </section>
@@ -92,7 +153,7 @@
         <a href="complete.html">VoltWorth Complete</a>
         <a href="pricing.html">Pricing</a>
         <a href="download.html">Download</a>
-        <a href="account.html">Account Preview</a>
+        <a href="account.html">Account</a>
       </div>
       <div>
         <h4>Company &amp; Compliance</h4>
