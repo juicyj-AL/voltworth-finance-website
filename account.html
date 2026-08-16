@@ -145,7 +145,48 @@
           </div>
 
           <div class="vw-panel" id="security"><h3>Security</h3>
-            <p>Sign out to remove this browser session and request revocation of the current server session.</p>
+            <p>Change your password or sign out of your VoltWorth account.</p>
+
+            <form id="vw-change-password-form" class="vw-auth-form" novalidate>
+              <label for="vw-current-password">Current Password</label>
+              <input
+                id="vw-current-password"
+                name="current_password"
+                type="password"
+                autocomplete="current-password"
+                maxlength="200"
+                required
+              >
+
+              <label for="vw-new-password">New Password (12 to 200 characters)</label>
+              <input
+                id="vw-new-password"
+                name="new_password"
+                type="password"
+                autocomplete="new-password"
+                minlength="12"
+                maxlength="200"
+                required
+              >
+
+              <label for="vw-confirm-new-password">Confirm New Password</label>
+              <input
+                id="vw-confirm-new-password"
+                name="confirm_new_password"
+                type="password"
+                autocomplete="new-password"
+                minlength="12"
+                maxlength="200"
+                required
+              >
+
+              <button id="vw-change-password-submit" class="vw-btn" type="submit">Change Password</button>
+            </form>
+
+            <div id="vw-change-password-message" class="vw-auth-message" role="status" aria-live="polite" hidden></div>
+
+            <p class="vw-micro">Changing your password signs out all active VoltWorth sessions. Sign in again with your new password.</p>
+            <p>Or sign out of only this browser session.</p>
             <button id="vw-logout-button" class="vw-btn" type="button">Sign Out</button>
           </div>
         </div>

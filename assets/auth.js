@@ -185,6 +185,10 @@
       return "You have been signed out.";
     }
 
+    if (reason === "password-changed") {
+      return "Your password was changed. Sign in again with your new password.";
+    }
+
     return "";
   }
 
@@ -422,7 +426,7 @@
       item.limit_value !== null &&
       item.limit_value !== undefined
     ) {
-      state += " ? Limit " + String(item.limit_value);
+      state += " \u2022 Limit " + String(item.limit_value);
     }
 
     detail.textContent = state;
@@ -626,6 +630,157 @@
     }
   }
 
+  function bindChangePassword() {
+    var form = document.getElementById(
+      "vw-change-password-form"
+    );
+
+    if (!form) {
+      return;
+    }
+
+    var message = document.getElementById(
+      "vw-change-password-message"
+    );
+
+    form.addEventListener(
+      "submit",
+      async function (event) {
+        event.preventDefault();
+
+        if (!isProductionSite()) {
+          localPreviewMessage(message);
+          return;
+        }
+
+        var currentInput = document.getElementById(
+          "vw-current-password"
+        );
+
+        var newInput = document.getElementById(
+          "vw-new-password"
+        );
+
+        var confirmInput = document.getElementById(
+          "vw-confirm-new-password"
+        );
+
+        var button = document.getElementById(
+          "vw-change-password-submit"
+        );
+
+        var currentPassword = currentInput.value;
+        var newPassword = newInput.value;
+        var confirmPassword = confirmInput.value;
+
+        if (!currentPassword || !newPassword || !confirmPassword) {
+          setMessage(
+            message,
+            "Complete all password fields.",
+            "error"
+          );
+          return;
+        }
+
+        if (newPassword.length < 12 || newPassword.length > 200) {
+          newInput.value = "";
+          confirmInput.value = "";
+
+          setMessage(
+            message,
+            "New password must be between 12 and 200 characters.",
+            "error"
+          );
+          return;
+        }
+
+        if (currentPassword === newPassword) {
+          currentInput.value = "";
+          newInput.value = "";
+          confirmInput.value = "";
+
+          setMessage(
+            message,
+            "New password must be different from the current password.",
+            "error"
+          );
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          newInput.value = "";
+          confirmInput.value = "";
+
+          setMessage(
+            message,
+            "The new passwords do not match.",
+            "error"
+          );
+          return;
+        }
+
+        setBusy(
+          button,
+          true,
+          "Changing Password...",
+          "Change Password"
+        );
+
+        setMessage(message, "", "");
+
+        try {
+          await apiRequest(
+            "/auth/change-password",
+            {
+              method: "POST",
+              auth: true,
+              body: {
+                current_password: currentPassword,
+                new_password: newPassword
+              }
+            }
+          );
+
+          form.reset();
+          clearSession();
+
+          window.location.replace(
+            "login.html?reason=password-changed"
+          );
+        } catch (error) {
+          currentInput.value = "";
+          newInput.value = "";
+          confirmInput.value = "";
+
+          if (
+            error.status === 401 ||
+            error.status === 403
+          ) {
+            clearSession();
+
+            window.location.replace(
+              "login.html?reason=session-expired"
+            );
+            return;
+          }
+
+          setMessage(
+            message,
+            error.message || "Unable to change your password.",
+            "error"
+          );
+        } finally {
+          setBusy(
+            button,
+            false,
+            "Changing Password...",
+            "Change Password"
+          );
+        }
+      }
+    );
+  }
+
   function bindLogout() {
     var button = document.getElementById(
       "vw-logout-button"
@@ -680,6 +835,7 @@
     "DOMContentLoaded",
     function () {
       bindLoginPage();
+      bindChangePassword();
       bindLogout();
       loadAccountPage();
     }
