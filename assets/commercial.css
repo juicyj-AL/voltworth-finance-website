@@ -813,3 +813,8 @@ h1.vw-title{font-size:clamp(3rem,6vw,5.8rem);line-height:.95;letter-spacing:-.05
 .vw-password-toggle:focus-visible{
   text-decoration:underline;
 }
+
+/* VoltWorth password autofill toggle contrast V1 */
+.vw-password-field input:-webkit-autofill + .vw-password-toggle{
+  color:#06111d;
+}
