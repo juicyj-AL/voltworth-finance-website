@@ -142,7 +142,8 @@
           >
 
           <label for="vw-register-password">Password (12 to 200 characters)</label>
-          <input
+          <div class="vw-password-field">
+            <input
             id="vw-register-password"
             name="password"
             type="password"
@@ -151,9 +152,19 @@
             maxlength="200"
             required
           >
+            <button
+              class="vw-password-toggle"
+              type="button"
+              data-target="vw-register-password"
+              aria-controls="vw-register-password"
+              aria-pressed="false"
+              aria-label="Show password"
+            >Show</button>
+          </div>
 
           <label for="vw-register-confirm">Confirm Password</label>
-          <input
+          <div class="vw-password-field">
+            <input
             id="vw-register-confirm"
             name="confirm_password"
             type="password"
@@ -162,6 +173,15 @@
             maxlength="200"
             required
           >
+            <button
+              class="vw-password-toggle"
+              type="button"
+              data-target="vw-register-confirm"
+              aria-controls="vw-register-confirm"
+              aria-pressed="false"
+              aria-label="Show password"
+            >Show</button>
+          </div>
 
           <button id="vw-register-submit" class="vw-btn primary" type="submit">Create Account</button>
         </form>
