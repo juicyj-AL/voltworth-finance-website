@@ -783,3 +783,33 @@ h1.vw-title{font-size:clamp(3rem,6vw,5.8rem);line-height:.95;letter-spacing:-.05
   }
 }
 /* VOLT_WORTH_AUTH_CUSTOMER_POLISH_V1_1_END */
+
+/* VoltWorth password visibility V1 */
+.vw-password-field{
+  position:relative;
+}
+.vw-password-field input{
+  width:100%;
+  padding-right:4.8rem;
+}
+.vw-password-toggle{
+  position:absolute;
+  z-index:1;
+  top:50%;
+  right:10px;
+  transform:translateY(-50%);
+  min-height:32px;
+  padding:0 6px;
+  border:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  font-size:.78rem;
+  font-weight:800;
+  line-height:1;
+  cursor:pointer;
+}
+.vw-password-toggle:hover,
+.vw-password-toggle:focus-visible{
+  text-decoration:underline;
+}

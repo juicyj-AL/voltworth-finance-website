@@ -192,6 +192,42 @@
     return "";
   }
 
+  function bindPasswordVisibility() {
+    var buttons = document.getElementsByClassName(
+      "vw-password-toggle"
+    );
+
+    Array.prototype.forEach.call(
+      buttons,
+      function (button) {
+        var targetId = button.getAttribute("data-target");
+        var input = document.getElementById(targetId);
+
+        if (!input) {
+          return;
+        }
+
+        button.addEventListener(
+          "click",
+          function () {
+            var visible = input.type === "password";
+
+            input.type = visible ? "text" : "password";
+            button.textContent = visible ? "Hide" : "Show";
+            button.setAttribute(
+              "aria-label",
+              visible ? "Hide password" : "Show password"
+            );
+            button.setAttribute(
+              "aria-pressed",
+              visible ? "true" : "false"
+            );
+          }
+        );
+      }
+    );
+  }
+
   function bindLoginPage() {
     var loginForm = document.getElementById("vw-login-form");
     var registerForm = document.getElementById("vw-register-form");
@@ -834,6 +870,7 @@
   document.addEventListener(
     "DOMContentLoaded",
     function () {
+      bindPasswordVisibility();
       bindLoginPage();
       bindChangePassword();
       bindLogout();

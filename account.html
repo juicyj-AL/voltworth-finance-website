@@ -149,36 +149,66 @@
 
             <form id="vw-change-password-form" class="vw-auth-form" novalidate>
               <label for="vw-current-password">Current Password</label>
-              <input
-                id="vw-current-password"
-                name="current_password"
-                type="password"
-                autocomplete="current-password"
-                maxlength="200"
-                required
-              >
+              <div class="vw-password-field">
+                <input
+                  id="vw-current-password"
+                  name="current_password"
+                  type="password"
+                  autocomplete="current-password"
+                  maxlength="200"
+                  required
+                >
+                <button
+                  class="vw-password-toggle"
+                  type="button"
+                  data-target="vw-current-password"
+                  aria-controls="vw-current-password"
+                  aria-pressed="false"
+                  aria-label="Show password"
+                >Show</button>
+              </div>
 
               <label for="vw-new-password">New Password (12 to 200 characters)</label>
-              <input
-                id="vw-new-password"
-                name="new_password"
-                type="password"
-                autocomplete="new-password"
-                minlength="12"
-                maxlength="200"
-                required
-              >
+              <div class="vw-password-field">
+                <input
+                  id="vw-new-password"
+                  name="new_password"
+                  type="password"
+                  autocomplete="new-password"
+                  minlength="12"
+                  maxlength="200"
+                  required
+                >
+                <button
+                  class="vw-password-toggle"
+                  type="button"
+                  data-target="vw-new-password"
+                  aria-controls="vw-new-password"
+                  aria-pressed="false"
+                  aria-label="Show password"
+                >Show</button>
+              </div>
 
               <label for="vw-confirm-new-password">Confirm New Password</label>
-              <input
-                id="vw-confirm-new-password"
-                name="confirm_new_password"
-                type="password"
-                autocomplete="new-password"
-                minlength="12"
-                maxlength="200"
-                required
-              >
+              <div class="vw-password-field">
+                <input
+                  id="vw-confirm-new-password"
+                  name="confirm_new_password"
+                  type="password"
+                  autocomplete="new-password"
+                  minlength="12"
+                  maxlength="200"
+                  required
+                >
+                <button
+                  class="vw-password-toggle"
+                  type="button"
+                  data-target="vw-confirm-new-password"
+                  aria-controls="vw-confirm-new-password"
+                  aria-pressed="false"
+                  aria-label="Show password"
+                >Show</button>
+              </div>
 
               <button id="vw-change-password-submit" class="vw-btn" type="submit">Change Password</button>
             </form>

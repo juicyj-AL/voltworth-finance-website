@@ -71,13 +71,23 @@
           >
 
           <label for="vw-login-password">Password</label>
-          <input
-            id="vw-login-password"
-            name="password"
-            type="password"
-            autocomplete="current-password"
-            required
-          >
+          <div class="vw-password-field">
+            <input
+              id="vw-login-password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+            >
+            <button
+              class="vw-password-toggle"
+              type="button"
+              data-target="vw-login-password"
+              aria-controls="vw-login-password"
+              aria-pressed="false"
+              aria-label="Show password"
+            >Show</button>
+          </div>
 
           <button id="vw-login-submit" class="vw-btn primary" type="submit">Sign In</button>
         </form>
