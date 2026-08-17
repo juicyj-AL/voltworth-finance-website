@@ -818,3 +818,70 @@ h1.vw-title{font-size:clamp(3rem,6vw,5.8rem);line-height:.95;letter-spacing:-.05
 .vw-password-field input:-webkit-autofill + .vw-password-toggle{
   color:#06111d;
 }
+
+/* VOLTWORTH_PASSWORD_RECOVERY_WEBSITE_V1 */
+.vw-auth-recovery-entry{
+  margin-top:10px;
+}
+.vw-link-button{
+  appearance:none;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--vw-teal2);
+  font:inherit;
+  font-size:.78rem;
+  font-weight:850;
+  cursor:pointer;
+  text-decoration:none;
+}
+.vw-link-button:hover,
+.vw-link-button:focus-visible{
+  color:#d9fffb;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.vw-auth-recovery-panel{
+  margin-top:14px;
+  padding:16px;
+  border:1px solid rgba(91,153,177,.17);
+  border-radius:14px;
+  background:rgba(0,0,0,.12);
+}
+.vw-auth-recovery-panel>p{
+  margin:0 0 8px;
+  color:var(--vw-muted);
+  font-size:.82rem;
+}
+.vw-auth-form-nested .vw-btn{
+  margin-top:10px;
+}
+.vw-auth-message-inline{
+  margin:14px 0 0;
+}
+.vw-auth-single{
+  max-width:650px;
+  margin:0 auto;
+}
+.vw-reset-security-note{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  margin-top:18px;
+  padding:14px 16px;
+  border:1px solid rgba(16,222,199,.16);
+  border-radius:12px;
+  background:rgba(16,222,199,.035);
+  color:#89a8b6;
+  font-size:.78rem;
+}
+.vw-reset-security-note strong{
+  flex:0 0 auto;
+  color:#cfe9e8;
+}
+@media(max-width:640px){
+  .vw-reset-security-note{
+    flex-direction:column;
+  }
+}
+/* VOLTWORTH_PASSWORD_RECOVERY_WEBSITE_V1_END */

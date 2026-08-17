@@ -92,6 +92,36 @@
           <button id="vw-login-submit" class="vw-btn primary" type="submit">Sign In</button>
         </form>
 
+        <div class="vw-auth-recovery-entry">
+          <button
+            id="vw-forgot-password-toggle"
+            class="vw-link-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="vw-forgot-password-panel"
+          >Forgot password?</button>
+        </div>
+
+        <div id="vw-forgot-password-panel" class="vw-auth-recovery-panel" hidden>
+          <p>Enter your account email. If an account exists, we will send a secure password reset link.</p>
+
+          <form id="vw-forgot-password-form" class="vw-auth-form vw-auth-form-nested" novalidate>
+            <label for="vw-forgot-password-email">Email</label>
+            <input
+              id="vw-forgot-password-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              inputmode="email"
+              required
+            >
+
+            <button id="vw-forgot-password-submit" class="vw-btn" type="submit">Send Reset Link</button>
+          </form>
+
+          <div id="vw-forgot-password-message" class="vw-auth-message vw-auth-message-inline" role="status" aria-live="polite" hidden></div>
+        </div>
+
         <p class="vw-micro">For security, your sign-in is limited to your current browser session and is cleared when you sign out.</p>
       </div>
 

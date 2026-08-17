@@ -189,6 +189,10 @@
       return "Your password was changed. Sign in again with your new password.";
     }
 
+    if (reason === "password-reset") {
+      return "Your password was reset. Sign in with your new password.";
+    }
+
     return "";
   }
 
@@ -437,6 +441,301 @@
             false,
             "Creating Account...",
             "Create Account"
+          );
+        }
+      }
+    );
+  }
+
+  function bindForgotPassword() {
+    var toggle = document.getElementById(
+      "vw-forgot-password-toggle"
+    );
+
+    var panel = document.getElementById(
+      "vw-forgot-password-panel"
+    );
+
+    var form = document.getElementById(
+      "vw-forgot-password-form"
+    );
+
+    if (!toggle || !panel || !form) {
+      return;
+    }
+
+    var emailInput = document.getElementById(
+      "vw-forgot-password-email"
+    );
+
+    var message = document.getElementById(
+      "vw-forgot-password-message"
+    );
+
+    var button = document.getElementById(
+      "vw-forgot-password-submit"
+    );
+
+    toggle.addEventListener(
+      "click",
+      function () {
+        var opening = panel.hidden;
+
+        panel.hidden = !opening;
+        toggle.setAttribute(
+          "aria-expanded",
+          opening ? "true" : "false"
+        );
+
+        if (opening && emailInput) {
+          var loginEmail = document.getElementById(
+            "vw-login-email"
+          );
+
+          if (
+            loginEmail &&
+            !emailInput.value.trim() &&
+            loginEmail.value.trim()
+          ) {
+            emailInput.value = loginEmail.value.trim();
+          }
+
+          emailInput.focus();
+        }
+      }
+    );
+
+    form.addEventListener(
+      "submit",
+      async function (event) {
+        event.preventDefault();
+
+        if (!isProductionSite()) {
+          localPreviewMessage(message);
+          return;
+        }
+
+        var email = emailInput.value.trim();
+
+        if (!email) {
+          setMessage(
+            message,
+            "Enter your account email address.",
+            "error"
+          );
+          return;
+        }
+
+        setBusy(
+          button,
+          true,
+          "Sending...",
+          "Send Reset Link"
+        );
+
+        setMessage(message, "", "");
+
+        try {
+          var data = await apiRequest(
+            "/auth/forgot-password",
+            {
+              method: "POST",
+              body: {
+                email: email
+              }
+            }
+          );
+
+          form.reset();
+
+          setMessage(
+            message,
+            (
+              data &&
+              typeof data.message === "string"
+            )
+              ? data.message
+              : "If an account exists for that email, a password reset message has been queued or sent.",
+            "success"
+          );
+        } catch (error) {
+          setMessage(
+            message,
+            error.message || "Unable to request a password reset.",
+            "error"
+          );
+        } finally {
+          setBusy(
+            button,
+            false,
+            "Sending...",
+            "Send Reset Link"
+          );
+        }
+      }
+    );
+  }
+
+  function takePasswordResetTokenFromFragment() {
+    var fragment = window.location.hash || "";
+    var token = "";
+
+    if (fragment.length > 1) {
+      var params = new URLSearchParams(
+        fragment.slice(1)
+      );
+
+      token = params.get("token") || "";
+    }
+
+    if (fragment) {
+      window.history.replaceState(
+        null,
+        document.title,
+        window.location.pathname + window.location.search
+      );
+    }
+
+    return token;
+  }
+
+  function bindResetPasswordPage() {
+    var form = document.getElementById(
+      "vw-reset-password-form"
+    );
+
+    if (!form) {
+      return;
+    }
+
+    var token = takePasswordResetTokenFromFragment();
+
+    var message = document.getElementById(
+      "vw-reset-password-message"
+    );
+
+    var newInput = document.getElementById(
+      "vw-reset-new-password"
+    );
+
+    var confirmInput = document.getElementById(
+      "vw-reset-confirm-password"
+    );
+
+    var button = document.getElementById(
+      "vw-reset-password-submit"
+    );
+
+    if (!token || token.length < 20 || token.length > 500) {
+      button.disabled = true;
+
+      setMessage(
+        message,
+        "This password reset link is invalid or expired. Request a new reset link from the Sign In page.",
+        "error"
+      );
+
+      return;
+    }
+
+    if (!isProductionSite()) {
+      localPreviewMessage(message);
+    }
+
+    form.addEventListener(
+      "submit",
+      async function (event) {
+        event.preventDefault();
+
+        if (!isProductionSite()) {
+          localPreviewMessage(message);
+          return;
+        }
+
+        var newPassword = newInput.value;
+        var confirmPassword = confirmInput.value;
+
+        if (!newPassword || !confirmPassword) {
+          setMessage(
+            message,
+            "Complete both password fields.",
+            "error"
+          );
+          return;
+        }
+
+        if (
+          newPassword.length < 12 ||
+          newPassword.length > 200
+        ) {
+          newInput.value = "";
+          confirmInput.value = "";
+
+          setMessage(
+            message,
+            "New password must be between 12 and 200 characters.",
+            "error"
+          );
+
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          newInput.value = "";
+          confirmInput.value = "";
+
+          setMessage(
+            message,
+            "The new passwords do not match.",
+            "error"
+          );
+
+          return;
+        }
+
+        setBusy(
+          button,
+          true,
+          "Resetting Password...",
+          "Reset Password"
+        );
+
+        setMessage(message, "", "");
+
+        try {
+          await apiRequest(
+            "/auth/reset-password",
+            {
+              method: "POST",
+              body: {
+                token: token,
+                new_password: newPassword
+              }
+            }
+          );
+
+          token = "";
+          form.reset();
+          clearSession();
+
+          window.location.replace(
+            "login.html?reason=password-reset"
+          );
+        } catch (error) {
+          newInput.value = "";
+          confirmInput.value = "";
+
+          setMessage(
+            message,
+            error.message || "Unable to reset your password.",
+            "error"
+          );
+        } finally {
+          setBusy(
+            button,
+            false,
+            "Resetting Password...",
+            "Reset Password"
           );
         }
       }
@@ -872,6 +1171,8 @@
     function () {
       bindPasswordVisibility();
       bindLoginPage();
+      bindForgotPassword();
+      bindResetPasswordPage();
       bindChangePassword();
       bindLogout();
       loadAccountPage();
